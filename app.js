@@ -16,7 +16,15 @@ function addKitten(event) {
   let kittenId = generateId();
   //console.log(kittenId);
 
-  kittens.push({name: kittenName, id: kittenId})
+  let newKitten = kittens.find(kitten => kitten.name == kittenName);
+
+  if (newKitten) {
+    window.alert('You already own a cat named ' + kittenName + '. Please choose a new name :)')
+  } else {
+    kittens.push({name: kittenName, id: kittenId})
+  }
+  
+
   //console.log(kittens)
 
   form.reset()
@@ -24,6 +32,7 @@ function addKitten(event) {
   drawKittens()
 
 }
+
 
 /**
  * Converts the kittens array to a JSON string then
