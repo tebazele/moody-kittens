@@ -31,6 +31,11 @@ function addKitten(event) {
   saveKittens()
   drawKittens()
 
+  if (kittens.length > 5) {
+    window.alert('The maximum number of kittens is 5')
+    document.getElementById('add-kitten-form').classList.add('hidden')
+  }
+
 }
 
 
@@ -51,9 +56,14 @@ function loadKittens() {
   let storedKittens = window.localStorage.getItem("kittens")
   let kittenData = JSON.parse(storedKittens)
   
-  if(kittenData) {
+  if(!kittenData) {
+    document.getElementById("welcome").classList.remove("hidden")
+  } else {
     kittens = kittenData
+    document.getElementById("add-kitten-form").classList.remove("hidden")
+    drawKittens() 
   }
+
 }
 
 /**
@@ -113,6 +123,7 @@ function clearKittens(){
  */
 function getStarted() {
   document.getElementById("welcome").remove();
+  document.getElementById("add-kitten-form").classList.remove('hidden')
   console.log('Good Luck, Take it away')
 }
 
