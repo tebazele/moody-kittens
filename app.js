@@ -7,6 +7,22 @@ let kittens = []
  * Then reset the form
  */
 function addKitten(event) {
+  event.preventDefault();
+  let form = event.target;
+
+  let kittenName = form.name.value;
+  //console.log(kittenName);
+
+  let kittenId = generateId();
+  //console.log(kittenId);
+
+  kittens.push({name: kittenName, id: kittenId})
+  //console.log(kittens)
+
+  form.reset()
+  saveKittens()
+  drawKittens()
+
 }
 
 /**
@@ -14,6 +30,7 @@ function addKitten(event) {
  * Saves the string to localstorage at the key kittens 
  */
 function saveKittens() {
+  window.localStorage.setItem("kittens", JSON.stringify(kittens))
 }
 
 /**
@@ -22,12 +39,19 @@ function saveKittens() {
  * the kittens array to the retrieved array
  */
 function loadKittens() {
+  let storedKittens = window.localStorage.getItem("kittens")
+  let kittenData = JSON.parse(storedKittens)
+  
+  if(kittenData) {
+    kittens = kittenData
+  }
 }
 
 /**
  * Draw all of the kittens to the kittens element
  */
 function drawKittens() {
+  
 }
 
 
@@ -102,3 +126,4 @@ function generateId() {
 }
 
 loadKittens();
+
