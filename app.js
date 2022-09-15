@@ -22,7 +22,7 @@ function addKitten(event) {
   if (newKitten) {
     window.alert('You already own a cat named ' + kittenName + '. Please choose a new name :)')
   } else {
-    kittens.push({name: kittenName, id: kittenId, pic: '', mood: 0})
+    kittens.push({name: kittenName, id: kittenId, pic: '', mood: "", affection: 0})
   }
   
   for (let i = 0; i < kittens.length; i++) {
@@ -91,16 +91,15 @@ function drawKittens() {
         <p>${kitty.name}</p>
         <div class='d-flex space-around'>
           <button class='interact mt-1' onclick="pet('${kitty.id}')">Pet</button>
-          <button class='interact mt-1'>Feed</button>
+          <button class='interact mt-1' onclick="catnip('${kitty.id}')">Give Catnip</button>
         </div>
         <button class='btn-cancel-ind p-1 mt-3' onclick="deleteKitten(${kitty.id})"><i class="fa-solid fa-x"></i></button>
       </div>`
     })
   document.getElementById('kittens').innerHTML = kittenTemplate
   }
-  
 }
-//drawKittens()
+
 
 /**
  * Find the kitten in the array by its id
@@ -130,12 +129,25 @@ function findKittenById(id) {
 function pet(id) {
   id = id; 
   let i = findKittenById(id);
-  let randMoodNum = Math.floor(Math.random() * 5);
+  let randMoodNum = Math.random();
+  
+  //let kittenAffection = ;
+  console.log(randMoodNum);
+  
 
-  kittens[i].mood = randMoodNum;
+  if (randMoodNum > .5) {
+    kittens[i].affection += 1;
+  } else {
+    kittens[i].affection -= 1;
+  }
+  console.log(kittens[i].affection);
   saveKittens()
-
+  loadKittens()
 }
+  
+  
+
+
 
 /**
  * Find the kitten in the array of kittens
@@ -144,6 +156,12 @@ function pet(id) {
  * @param {string} id
  */
 function catnip(id) {
+  let i = findKittenById(id);
+  kittens[i].mood = 'tolerant';
+  kittens[i].affection = 5;
+
+  saveKittens()
+  loadKittens()
 }
 
 /**
@@ -151,11 +169,12 @@ function catnip(id) {
  * @param {Kitten} kitten 
  */
 function setKittenMood(kitten) {
-  kittens.forEach(kitten => {
+  console.log(kitten)
+  /*kittens.forEach(kitten => {
     let kittenMood = kitten.mood
     let element = document.querySelector('.kitten')
 
-  })
+  })*/
 }
 
 function deleteKitten(id) {
