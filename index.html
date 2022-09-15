@@ -8,6 +8,9 @@
   <title>Moody Kittens | CodeWorks</title>
   <link rel="shortcut icon" href="moody-logo.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Catamaran&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Permanent+Marker&family=Roboto:ital,wght@1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -39,8 +42,11 @@
     </div>
     <div class="p-2">
       <div id="kittens" class="d-flex align-items-center flex-wrap">
-
+        
       </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button id="start-over" class="btn-cancel hidden" onclick="clearKittens()">Start Over<br><small>(deletes all kittens)</small></button>
     </div>
   </main>
   <footer class="card bg-dark text-light p-2 d-flex align-items-center justify-content-center">

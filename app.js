@@ -1,4 +1,5 @@
-let kittens = []
+let kittens = [];
+let kittenPics = ['cat_1.png', 'cat_2.png', 'cat_3.png', 'cat_4.png', 'cat_5.png'];
 /**
  * Called when submitting the new Kitten Form
  * This method will pull data from the form
@@ -13,7 +14,7 @@ function addKitten(event) {
   let kittenName = form.name.value;
   //console.log(kittenName);
 
-  let kittenId = generateId();
+  let kittenId = 'id-'+ generateId();
   //console.log(kittenId);
 
   let newKitten = kittens.find(kitten => kitten.name == kittenName);
@@ -21,21 +22,28 @@ function addKitten(event) {
   if (newKitten) {
     window.alert('You already own a cat named ' + kittenName + '. Please choose a new name :)')
   } else {
-    kittens.push({name: kittenName, id: kittenId})
+    kittens.push({name: kittenName, id: kittenId, pic: '', mood: 0})
   }
   
+  for (let i = 0; i < kittens.length; i++) {
+    kittens[i].pic = kittenPics[i]; 
+  }
 
   //console.log(kittens)
 
   form.reset()
+  document.getElementById('start-over').classList.remove('hidden')
+  document.getElementById('welcome').classList.add('hidden')
+  checkKittensNum()
+
   saveKittens()
   drawKittens()
+}
 
-  if (kittens.length > 5) {
-    window.alert('The maximum number of kittens is 5')
+function checkKittensNum() {
+  if (kittens.length == 5) {
     document.getElementById('add-kitten-form').classList.add('hidden')
   }
-
 }
 
 
@@ -61,18 +69,38 @@ function loadKittens() {
   } else {
     kittens = kittenData
     document.getElementById("add-kitten-form").classList.remove("hidden")
-    drawKittens() 
+    document.getElementById('start-over').classList.remove('hidden') 
   }
-
+drawKittens()
 }
 
 /**
  * Draw all of the kittens to the kittens element
  */
 function drawKittens() {
+  let kittenTemplate = ""
+  if (!kittens) {
+    console.log(kittenTemplate)
+    document.getElementById('kittens').innerHTML = kittenTemplate
+  } else {
+    kittens.forEach(kitty => {
+      kittenTemplate += `
+      <div class="kitten container card mt-2 mb-2" kittenId="${kitty.id}">
+        <img src="${kitty.pic}">
+        <br>
+        <p>${kitty.name}</p>
+        <div class='d-flex space-around'>
+          <button class='interact mt-1' onclick="pet('${kitty.id}')">Pet</button>
+          <button class='interact mt-1'>Feed</button>
+        </div>
+        <button class='btn-cancel-ind p-1 mt-3' onclick="deleteKitten(${kitty.id})"><i class="fa-solid fa-x"></i></button>
+      </div>`
+    })
+  document.getElementById('kittens').innerHTML = kittenTemplate
+  }
   
 }
-
+//drawKittens()
 
 /**
  * Find the kitten in the array by its id
@@ -80,6 +108,14 @@ function drawKittens() {
  * @return {Kitten}
  */
 function findKittenById(id) {
+  //console.log(id)
+  let index = kittens.findIndex(kitten => kitten.id == id)
+  if (index == -1) {
+    throw new Error('invalid kitten id')
+  } else {
+    return index;
+  }
+   
 }
 
 
@@ -92,6 +128,13 @@ function findKittenById(id) {
  * @param {string} id 
  */
 function pet(id) {
+  id = id; 
+  let i = findKittenById(id);
+  let randMoodNum = Math.floor(Math.random() * 5);
+
+  kittens[i].mood = randMoodNum;
+  saveKittens()
+
 }
 
 /**
@@ -108,13 +151,35 @@ function catnip(id) {
  * @param {Kitten} kitten 
  */
 function setKittenMood(kitten) {
+  kittens.forEach(kitten => {
+    let kittenMood = kitten.mood
+    let element = document.querySelector('.kitten')
+
+  })
 }
+
+function deleteKitten(id) {
+  let i = kittens.findIndex(kitten => kitten.id == id)
+  
+  kittens.splice(i, 1)
+
+  
+  saveKittens()
+  loadKittens()
+  drawKittens()
+
+}
+
 
 /**
  * Removes all of the kittens from the array
  * remember to save this change
  */
 function clearKittens(){
+  kittens = [];
+  localStorage.clear();
+  loadKittens()
+  document.getElementById('start-over').classList.add('hidden')
 }
 
 /**
@@ -122,7 +187,7 @@ function clearKittens(){
  * list of kittens to the page. Good Luck
  */
 function getStarted() {
-  document.getElementById("welcome").remove();
+  document.getElementById("welcome").classList.add('hidden');
   document.getElementById("add-kitten-form").classList.remove('hidden')
   console.log('Good Luck, Take it away')
 }
@@ -146,4 +211,5 @@ function generateId() {
 }
 
 loadKittens();
+drawKittens();
 

@@ -128,9 +128,16 @@ button.btn-special:hover{
 }
 
 
+.kitten p {
+  margin: auto;
+  text-align: center;
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
 .kitten img{
   filter: drop-shadow(2px 4px 6px #1b1b1b);
   transition: all .35s ease;
+  height: 250px;
 }
 .kitten.happy img{
   filter: drop-shadow(2px 4px 6px #00ffb3);
@@ -172,6 +179,22 @@ button.btn-special:hover{
 .btn-cancel:hover{
   background-color: #fa4141;
   border-color: #ff3737;
+}
+
+.btn-cancel-ind{
+  background-color: red;
+  border-color: lightcoral;
+  position: relative;
+  float: right;
+}
+.btn-cancel-ind:hover{
+  background-color: #fa4141;
+  border-color: #ff3737;
+}
+
+.interact {
+  width: 45%;
+  height: 50px;
 }
 
 .text-danger{
