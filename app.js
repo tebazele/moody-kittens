@@ -85,7 +85,7 @@ function drawKittens() {
   } else {
     kittens.forEach(kitty => {
       kittenTemplate += `
-      <div class="kitten container card mt-2 mb-2" kittenId="${kitty.id}">
+      <div class="kitten container card mt-2 mb-2 ${kitty.mood}" kittenId="${kitty.id}">
         <img src="${kitty.pic}">
         <br>
         <p>${kitty.name}</p>
@@ -132,7 +132,7 @@ function pet(id) {
   let randMoodNum = Math.random();
   
   //let kittenAffection = ;
-  console.log(randMoodNum);
+  //console.log(randMoodNum);
   
 
   if (randMoodNum > .5) {
@@ -140,9 +140,12 @@ function pet(id) {
   } else {
     kittens[i].affection -= 1;
   }
-  console.log(kittens[i].affection);
+  let kitten = {name: kittens[i].name, mood: kittens[i].mood, affection: kittens[i].affection}
+  
+  setKittenMood(kitten)
   saveKittens()
   loadKittens()
+  
 }
   
   
@@ -160,8 +163,12 @@ function catnip(id) {
   kittens[i].mood = 'tolerant';
   kittens[i].affection = 5;
 
+  let kitten = {name: kittens[i].name, mood: kittens[i].mood, affection: kittens[i].affection}
+  
+  setKittenMood(kitten)
   saveKittens()
   loadKittens()
+  
 }
 
 /**
@@ -169,12 +176,28 @@ function catnip(id) {
  * @param {Kitten} kitten 
  */
 function setKittenMood(kitten) {
-  console.log(kitten)
-  /*kittens.forEach(kitten => {
-    let kittenMood = kitten.mood
-    let element = document.querySelector('.kitten')
+  //console.log(kitten)
+  if(kitten.affection > 5) {
+    kitten.mood = 'happy'
+  } else if (kitten.affection <= 5 && kitten.affection >= 3) {
+    kitten.mood = 'tolerant'
+  } else if (kitten.affection <= 2 && kitten.affection >= 0) {
+    kitten.mood = 'angry'
+  } else {
+    kitten.mood = 'gone'
+  }
+  let i = kittens.findIndex(cat => cat.name == kitten.name)
+  kittens[i].mood = kitten.mood
+  console.log(kittens[i])
+  
+  let element = document.querySelector('.kitten')
+  console.log(element)
+  console.log(element.classList)
+  element.classList.add(kitten.mood)
+  console.log(element.classList)
 
-  })*/
+  saveKittens()
+  loadKittens()
 }
 
 function deleteKitten(id) {
