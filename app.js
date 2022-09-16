@@ -143,14 +143,11 @@ function pet(id) {
   let kitten = {name: kittens[i].name, mood: kittens[i].mood, affection: kittens[i].affection}
   
   setKittenMood(kitten)
+  console.log(kitten)
   saveKittens()
   loadKittens()
   
 }
-  
-  
-
-
 
 /**
  * Find the kitten in the array of kittens
@@ -166,6 +163,7 @@ function catnip(id) {
   let kitten = {name: kittens[i].name, mood: kittens[i].mood, affection: kittens[i].affection}
   
   setKittenMood(kitten)
+  console.log(kitten)
   saveKittens()
   loadKittens()
   
@@ -179,25 +177,23 @@ function setKittenMood(kitten) {
   //console.log(kitten)
   if(kitten.affection > 5) {
     kitten.mood = 'happy'
-  } else if (kitten.affection <= 5 && kitten.affection >= 3) {
+  } else if (kitten.affection <= 5 && kitten.affection >= 4) {
     kitten.mood = 'tolerant'
-  } else if (kitten.affection <= 2 && kitten.affection >= 0) {
+  } else if (kitten.affection <= 3 && kitten.affection >= 0) {
     kitten.mood = 'angry'
   } else {
     kitten.mood = 'gone'
   }
   let i = kittens.findIndex(cat => cat.name == kitten.name)
   kittens[i].mood = kitten.mood
-  console.log(kittens[i])
+  //console.log(kittens[i])
   
-  let element = document.querySelector('.kitten')
-  console.log(element)
-  console.log(element.classList)
-  element.classList.add(kitten.mood)
-  console.log(element.classList)
-
+  
   saveKittens()
   loadKittens()
+
+  
+  
 }
 
 function deleteKitten(id) {
@@ -233,6 +229,7 @@ function getStarted() {
   document.getElementById("add-kitten-form").classList.remove('hidden')
   console.log('Good Luck, Take it away')
 }
+drawKittens()
 
 
 // --------------------------------------------- No Changes below this line are needed

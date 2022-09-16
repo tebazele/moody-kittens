@@ -156,6 +156,10 @@ button.btn-special:hover{
   pointer-events: none;
 }
 
+.kitten.gone button {
+  background-color: rgb(165, 154, 154);
+}
+
 .bg-dark{
   background-color: var(--dark);
 }
