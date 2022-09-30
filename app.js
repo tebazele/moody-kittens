@@ -93,12 +93,14 @@ function drawKittens() {
           <button class='interact mt-1' onclick="pet('${kitty.id}')">Pet</button>
           <button class='interact mt-1' onclick="catnip('${kitty.id}')">Give Catnip</button>
         </div>
-        <button class='btn-cancel-ind p-1 mt-3' onclick="deleteKitten(${kitty.id})"><i class="fa-solid fa-x"></i></button>
+          <button class='btn-cancel-ind p-1 mt-3' onclick="deleteKitten(${kitty.id})"><i class="fa-solid fa-x"></i></button>
       </div>`
     })
   document.getElementById('kittens').innerHTML = kittenTemplate
   }
 }
+
+
 
 
 /**
@@ -131,10 +133,6 @@ function pet(id) {
   let i = findKittenById(id);
   let randMoodNum = Math.random();
   
-  //let kittenAffection = ;
-  //console.log(randMoodNum);
-  
-
   if (randMoodNum > .5) {
     kittens[i].affection += 1;
   } else {
@@ -186,25 +184,23 @@ function setKittenMood(kitten) {
   }
   let i = kittens.findIndex(cat => cat.name == kitten.name)
   kittens[i].mood = kitten.mood
-  //console.log(kittens[i])
-  
+  //console.log(kittens[i]) 
   
   saveKittens()
-  loadKittens()
-
-  
-  
+  loadKittens() 
 }
 
-function deleteKitten(id) {
-  let i = kittens.findIndex(kitten => kitten.id == id)
-  
-  kittens.splice(i, 1)
 
+function deleteKitten(id) {
+  if (window.confirm('Are you sure you want to delete this kitten?')) {
+    let i = kittens.findIndex(kitten => kitten.id == id)
   
-  saveKittens()
-  loadKittens()
-  drawKittens()
+    kittens.splice(i, 1)
+
+    saveKittens()
+    loadKittens()
+    drawKittens()
+  }
 
 }
 
