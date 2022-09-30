@@ -156,8 +156,13 @@ button.btn-special:hover{
   pointer-events: none;
 }
 
-.kitten.gone button {
+.kitten.gone button.interact {
   background-color: rgb(165, 154, 154);
+}
+
+.kitten.gone button.btn-cancel-ind {
+  background-color: red;
+  pointer-events: all;
 }
 
 .bg-dark{

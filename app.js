@@ -161,7 +161,7 @@ function catnip(id) {
   let kitten = {name: kittens[i].name, mood: kittens[i].mood, affection: kittens[i].affection}
   
   setKittenMood(kitten)
-  console.log(kitten)
+  //console.log(kitten)
   saveKittens()
   loadKittens()
   
@@ -181,15 +181,30 @@ function setKittenMood(kitten) {
     kitten.mood = 'angry'
   } else {
     kitten.mood = 'gone'
+    
   }
   let i = kittens.findIndex(cat => cat.name == kitten.name)
   kittens[i].mood = kitten.mood
-  //console.log(kittens[i]) 
-  
+  //console.log(kittens[i])
+
   saveKittens()
-  loadKittens() 
+  loadKittens()
+  bringKittenBack()
 }
 
+function bringKittenBack() {
+  for (let i in kittens) {
+    if (kittens[i].mood == 'gone') {
+      setTimeout(() => {
+        kittens[i].mood = 'angry';
+        kittens[i].affection = 3;
+        saveKittens()
+        loadKittens()
+        drawKittens()
+      }, 60000);
+    }
+  }  
+}
 
 function deleteKitten(id) {
   if (window.confirm('Are you sure you want to delete this kitten?')) {
@@ -225,7 +240,7 @@ function getStarted() {
   document.getElementById("add-kitten-form").classList.remove('hidden')
   console.log('Good Luck, Take it away')
 }
-drawKittens()
+//drawKittens()
 
 
 // --------------------------------------------- No Changes below this line are needed
