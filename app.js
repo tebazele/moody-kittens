@@ -160,7 +160,7 @@ function catnip(id) {
 
   let kitten = {name: kittens[i].name, mood: kittens[i].mood, affection: kittens[i].affection}
 
-  document.getElementById('feedCatnip').classList.remove('hidden');
+  document.getElementById('feedCatnip').style.visibility = 'visible';
   setTimeout(stopCatnip, 2000); 
 
   setKittenMood(kitten)
@@ -171,7 +171,7 @@ function catnip(id) {
 }
 
 function stopCatnip() {
-  document.getElementById('feedCatnip').classList.add('hidden');
+  document.getElementById('feedCatnip').style.visibility = 'hidden';
 }
 
 /**

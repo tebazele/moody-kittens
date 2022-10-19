@@ -207,6 +207,7 @@ button.btn-special:hover{
 }
 
 .catnip-indicator {
+  visibility: hidden;
   color: rgb(14, 171, 14);
   animation: blinker 1s linear infinite;
 }
@@ -215,6 +216,10 @@ button.btn-special:hover{
   50% {
     opacity: 0;
   }
+}
+
+.catnip-indicator h1 {
+  margin:0;
 }
 
 .text-danger{
