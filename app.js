@@ -159,12 +159,19 @@ function catnip(id) {
   kittens[i].affection = 5;
 
   let kitten = {name: kittens[i].name, mood: kittens[i].mood, affection: kittens[i].affection}
-  
+
+  document.getElementById('feedCatnip').classList.remove('hidden');
+  setTimeout(stopCatnip, 2000); 
+
   setKittenMood(kitten)
   //console.log(kitten)
   saveKittens()
   loadKittens()
   
+}
+
+function stopCatnip() {
+  document.getElementById('feedCatnip').classList.add('hidden');
 }
 
 /**

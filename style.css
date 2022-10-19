@@ -206,6 +206,17 @@ button.btn-special:hover{
   height: 50px;
 }
 
+.catnip-indicator {
+  color: rgb(14, 171, 14);
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
 .text-danger{
   color: var(--danger);
 }
